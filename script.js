@@ -88,11 +88,23 @@ function paint(e) {
 drawGrid(gridLength);
 
 //event listeners
-addGlobalEventListener("click", ".tool", () => console.log("tool clicked"));
+addGlobalEventListener("click", ".tool", e => {
+  if (qs(".active")) {
+    qs(".active").classList.toggle("active");
+  }
+  e.target.classList.add("active");
+});
+
 addGlobalEventListener("mouseover", ".grid-item", e => paint(e));
 
 slider.addEventListener("change", e => {
   gridLength = e.target.value;
   drawGrid(gridLength);
   console.log(gridLength);
+});
+
+colorPicker.addEventListener("click", e => {
+  if (qs(".active")) {
+    qs(".active").classList.toggle("active");
+  }
 });
