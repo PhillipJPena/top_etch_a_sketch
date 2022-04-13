@@ -9,15 +9,18 @@
   </head>
   <body>
     <header>Etch-A-Sketch</header>
-    <input type="range" id="slider" />
+    <div class="wrapper">
+      <input type="range" min="16" max="64" id="slider" name="grid-length" />
+      <label for="grid-length" id="slider-label">slider label</label>
+    </div>
     <div class="sketch-area" id="sketch-area"></div>
     <div class="toolbar" id="toolbar">
-      <input type="color" name="" id="" />
+      <input type="color" id="color-picker" />
       <button class="tool" id="rainbow">Rainbow</button>
       <button class="tool" id="greyscale">Greyscale</button>
       <button class="tool" id="eraser">Eraser</button>
       <button class="tool" id="clear">Clear</button>
     </div>
-    <script src="srcipt.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
