@@ -65,6 +65,7 @@ let clearBtn = qs("#clear");
 
 //variable declarations
 let gridLength = 32;
+let inkState;
 
 //app functions
 function drawGrid(dimension) {
@@ -81,9 +82,31 @@ function drawGrid(dimension) {
 }
 
 function paint(e) {
-  e.target.style.backgroundColor = colorPicker.value;
+  e.target.style.backgroundColor = ink();
 }
 
+function rainbowInk() {
+  return "green";
+}
+
+function greyscaleInk() {
+  return "gray";
+}
+
+function eraser() {
+  return "red";
+}
+
+function clear() {
+  qsa(".grid-item").forEach(item => (item.style.background = "white"));
+}
+
+function ink() {
+  if (!qs(".active")) return colorPicker.value;
+  if (inkState === "Rainbow") return rainbowInk();
+  if (inkState === "Greyscale") return greyscaleInk();
+  if (inkState === "Eraser") return eraser();
+}
 //window on load
 drawGrid(gridLength);
 
@@ -93,6 +116,7 @@ addGlobalEventListener("click", ".tool", e => {
     qs(".active").classList.toggle("active");
   }
   e.target.classList.add("active");
+  inkState = e.target.textContent;
 });
 
 addGlobalEventListener("mouseover", ".grid-item", e => paint(e));
@@ -107,4 +131,8 @@ colorPicker.addEventListener("click", e => {
   if (qs(".active")) {
     qs(".active").classList.toggle("active");
   }
+});
+
+clearBtn.addEventListener("click", () => {
+  clear();
 });
