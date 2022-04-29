@@ -82,29 +82,32 @@ function drawGrid(dimension) {
 }
 
 function paint(e) {
-  e.target.style.backgroundColor = ink();
+  e.target.style.backgroundColor = ink(e);
 }
 
 function rainbowInk() {
-  return "green";
+  function randomHsl() {
+    return "hsla(" + Math.random() * 360 + ", 100%, 50%, 1)";
+  }
+  return randomHsl();
 }
 
-function greyscaleInk() {
+function greyscaleInk(e) {
   return "gray";
 }
 
 function eraser() {
-  return "red";
+  return "white";
 }
 
 function clear() {
   qsa(".grid-item").forEach(item => (item.style.background = "white"));
 }
 
-function ink() {
+function ink(e) {
   if (!qs(".active")) return colorPicker.value;
   if (inkState === "Rainbow") return rainbowInk();
-  if (inkState === "Greyscale") return greyscaleInk();
+  if (inkState === "Greyscale") return greyscaleInk(e);
   if (inkState === "Eraser") return eraser();
 }
 //window on load
