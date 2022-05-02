@@ -56,6 +56,7 @@ function removeAllChildNodes(parent) {
 
 //DOM elements
 let slider = qs("#slider");
+let sliderLabel = qs("#slider-label");
 let sketchArea = qs("#sketch-area");
 let colorPicker = qs("#color-picker");
 let rainbowBtn = qs("#rainbow");
@@ -127,6 +128,7 @@ addGlobalEventListener("mouseover", ".grid-item", e => paint(e));
 slider.addEventListener("change", e => {
   gridLength = e.target.value;
   drawGrid(gridLength);
+  sliderLabel.textContent = `${gridLength} x ${gridLength}`;
   console.log(gridLength);
 });
 
